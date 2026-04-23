@@ -1,0 +1,21 @@
+.git
+.next
+node_modules
+.env
+.env.*
+!.env.example
+e2e
+**/*.test.ts
+**/*.test.tsx
+docs
+coverage
+playwright-report
+test-results
+smoke-output
+# Generated at build time by `prisma generate` in the Docker builder stage;
+# never ship stale local output into the image.
+src/generated
+prisma/dev.db
+prisma/dev.db-journal
+prisma/test.db
+prisma/test.db-journal

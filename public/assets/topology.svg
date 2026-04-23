@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Network topology placeholder">
+  <style>
+    .bg { fill: #0b0f14; }
+    .box { fill: #1a2230; stroke: #3a4a60; stroke-width: 1.5; }
+    .label { fill: #c7d2de; font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .muted { fill: #7f8a99; font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .line { stroke: #3a4a60; stroke-width: 1.5; fill: none; }
+    .accent { stroke: #f5a524; stroke-width: 1.5; stroke-dasharray: 4 3; fill: none; }
+  </style>
+  <rect class="bg" width="800" height="480"/>
+
+  <rect class="box" x="320" y="30"  width="160" height="46" rx="6"/>
+  <text class="label" x="400" y="52" text-anchor="middle">Internet</text>
+  <text class="muted" x="400" y="68" text-anchor="middle">Example ISP · 1 Gbit</text>
+
+  <line class="line" x1="400" y1="76" x2="400" y2="118"/>
+
+  <rect class="box" x="320" y="118" width="160" height="46" rx="6"/>
+  <text class="label" x="400" y="140" text-anchor="middle">Router / Firewall</text>
+  <text class="muted" x="400" y="156" text-anchor="middle">10.0.0.1</text>
+
+  <line class="line" x1="400" y1="164" x2="400" y2="206"/>
+
+  <rect class="box" x="320" y="206" width="160" height="46" rx="6"/>
+  <text class="label" x="400" y="228" text-anchor="middle">Core Switch</text>
+  <text class="muted" x="400" y="244" text-anchor="middle">VLAN trunk</text>
+
+  <line class="line" x1="400" y1="252" x2="160" y2="310"/>
+  <line class="line" x1="400" y1="252" x2="400" y2="310"/>
+  <line class="line" x1="400" y1="252" x2="640" y2="310"/>
+
+  <rect class="box" x="80"  y="310" width="160" height="46" rx="6"/>
+  <text class="label" x="160" y="332" text-anchor="middle">Access Point</text>
+  <text class="muted" x="160" y="348" text-anchor="middle">Wi-Fi</text>
+
+  <rect class="box" x="320" y="310" width="160" height="46" rx="6"/>
+  <text class="label" x="400" y="332" text-anchor="middle">Hypervisor</text>
+  <text class="muted" x="400" y="348" text-anchor="middle">10.0.0.10</text>
+
+  <rect class="box" x="560" y="310" width="160" height="46" rx="6"/>
+  <text class="label" x="640" y="332" text-anchor="middle">NAS</text>
+  <text class="muted" x="640" y="348" text-anchor="middle">10.0.0.30</text>
+
+  <rect class="box" x="200" y="390" width="400" height="60" rx="6"/>
+  <text class="label" x="400" y="414" text-anchor="middle">Placeholder topology</text>
+  <text class="muted" x="400" y="432" text-anchor="middle">Replace public/assets/topology.svg with your own diagram.</text>
+</svg>

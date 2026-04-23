@@ -1,0 +1,56 @@
+services:
+  homelab-dashboard:
+    image: ghcr.io/example-user/homelab-dashboard:${IMAGE_TAG:-latest}
+    container_name: homelab-dashboard
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      # All real credentials come from Portainer stack env vars — never from compose file
+      HA_BASE_URL: ${HA_BASE_URL:-https://example.com}
+      HA_TOKEN: ${HA_TOKEN}
+      PVE_BASE_URL: ${PVE_BASE_URL:-https://10.0.0.10:8006}
+      PVE_TOKEN_ID: ${PVE_TOKEN_ID:-homelab-dashboard@pve!readonly}
+      PVE_TOKEN_SECRET: ${PVE_TOKEN_SECRET}
+      PVE_INSECURE_TLS: "true"
+      PORTAINER_BASE_URL: ${PORTAINER_BASE_URL:-https://10.0.0.13:9443}
+      PORTAINER_API_KEY: ${PORTAINER_API_KEY}
+      PORTAINER_ENDPOINT_ID: "2"
+      PORTAINER_INSECURE_TLS: "true"
+      CACHE_TTL_SECONDS: "15"
+      # NODE_TLS_REJECT_UNAUTHORIZED removed in security audit 2026-04-21: per-host
+      # TLS relaxation for PVE + Portainer now lives in src/lib/http.ts via a scoped
+      # undici Agent. Global TLS verification is restored for everything else.
+      # Auth
+      DATABASE_URL: file:/app/data/auth.sqlite
+      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_URL: ${AUTH_URL:-https://homelab.example.com}
+      AUTH_TRUST_HOST: "true"
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      # GitHub auto-sync for /projects (optional)
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      GITHUB_SYNC_OWNER: ${GITHUB_SYNC_OWNER:-example-user}
+      GITHUB_SYNC_INTERVAL_MS: ${GITHUB_SYNC_INTERVAL_MS:-900000}
+    ports:
+      # Direct port for Cloudflare Tunnel ingress (consistent with other stacks)
+      - "3851:3000"
+    volumes:
+      - homelab-dashboard-data:/app/data
+    networks:
+      - traefik-proxy
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: "traefik-proxy"
+      traefik.http.routers.homelab-dashboard.rule: "Host(`homelab.example.com`)"
+      traefik.http.routers.homelab-dashboard.entrypoints: "websecure"
+      traefik.http.routers.homelab-dashboard.tls: "true"
+      traefik.http.services.homelab-dashboard.loadbalancer.server.port: "3000"
+
+networks:
+  traefik-proxy:
+    external: true
+
+volumes:
+  homelab-dashboard-data:
+    name: homelab-dashboard-data
