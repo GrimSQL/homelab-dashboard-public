@@ -30,7 +30,7 @@
     "@prisma/client": "^6.19.3",
     "clsx": "^2.1.1",
     "isomorphic-dompurify": "^3.21.0",
-    "ky": "^2.0.1",
+    "ky": "^2.0.2",
     "marked": "^18.0.9",
     "next": "15.5.22",
     "next-auth": "5.0.0-beta.32",
@@ -38,8 +38,8 @@
     "react-dom": "19.2.8",
     "server-only": "^0.0.1",
     "undici": "^7.29.0",
-    "zod": "^4.3.6",
-    "zustand": "^5.0.12"
+    "zod": "^4.4.3",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
