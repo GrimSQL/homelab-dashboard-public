@@ -53,7 +53,7 @@ All three are fetched in parallel on a 15 s background loop. `getHomelab()` on t
 
 ## Security posture
 
-- All routes except `/login`, `/signup`, `/api/auth/*` gated by middleware
+- All routes except `/login`, `/signup`, `/api/auth/*` gated by the request proxy
 - Admin routes return 404 (not 403) to non-admins to avoid leaking endpoint existence
 - Argon2id params: t=3, m=64 MiB, p=4
 - Invite codes: 128-bit entropy, single-use with CAS transaction

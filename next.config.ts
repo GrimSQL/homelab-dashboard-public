@@ -7,10 +7,10 @@ const config: NextConfig = {
   poweredByHeader: false,
   async headers() {
     // Global security headers applied to every route. Intentionally omits a
-    // strict Content-Security-Policy for now: Next 15's no-flash theme inline
+    // strict Content-Security-Policy for now: the no-flash theme inline
     // script and the next/font inline <style> tag conflict with
     // `script-src 'self'` / `style-src 'self'` without nonces, and wiring
-    // nonces through edge middleware is a separate task.
+    // nonces through the proxy is a separate task.
     return [
       {
         source: "/:path*",

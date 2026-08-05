@@ -9,7 +9,7 @@ function isPublic(path: string): boolean {
   return PUBLIC_PATH_PREFIXES.some((p) => path === p || path.startsWith(p + "/"));
 }
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Skip static assets + the public pages
@@ -21,9 +21,9 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Middleware runs on the Edge runtime, which can't reach Prisma. So we only
-  // check that a session cookie is present — full validation happens in the
-  // dashboard layout's auth() call on the Node runtime. This is safe: the
+  // The proxy runs on every request, so it only checks that a session cookie
+  // is present — full validation happens in the dashboard layout's auth()
+  // call, which owns the database round-trip. This is safe: the
   // cookie is signed/encrypted with AUTH_SECRET, so a forged one won't pass
   // auth() on the server.
   const sessionCookie =
